@@ -4,15 +4,25 @@
         <Console name="LogToConsole" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-        <File name="LogToFile" fileName="logs/app.log">
+        <File name="AppLog" fileName="logs/app.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="aLog" fileName="logs/test.log">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="com.mkyong" level="debug" additivity="false">
-            <AppenderRef ref="LogToFile"/>
+	    <Root level="debug">
+	      <!-- Only events at DIAG level or more specific are sent to the console. -->
+	      <AppenderRef ref="AppLog"/>
+            <AppenderRef ref="LogToConsole"/>
+	    </Root>
+        <Logger name="com.mkyong.a" level="debug" additivity="false">
+            <AppenderRef ref="aLog"/>
             <AppenderRef ref="LogToConsole"/>
         </Logger>
         <Logger name="org.springframework.boot" level="error" additivity="false">
