@@ -20,13 +20,11 @@ public class HelloController {
     @GetMapping("/")
     public String main(Model model) {
 
-        // pre-java 8
-        if (logger.isDebugEnabled()) {
-            logger.debug("Hello from Log4j 2 - num : {}", num);
-        }
-
-        // java 8 lambda, no need to check log level
-        logger.debug("Hello from Log4j 2 - num : {}", () -> num);
+    	logger.info("INFOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+    	logger.warn("WARNINGNNNNNNNNNNNNNNNNNNNNIIIIIIIIIIIIIIIIIIIIIII");
+    	logger.fatal("FATALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+        logger.debug("DEBUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+        logger.error("ERRORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR Hello from Log4j 2 - num : {}", () -> num);
 
         model.addAttribute("tasks", num);
 
@@ -36,13 +34,9 @@ public class HelloController {
     @GetMapping("/abc")
     public String test(Model model) {
 
-        // pre-java 8
-        if (logger.isDebugEnabled()) {
-            logger.debug("Hello from Log4j 2 - num : {}", num);
-        }
-
+     
         // java 8 lambda, no need to check log level
-        logger.debug("Hello from Log4j 2 - num : {}", () -> num);
+        logger.debug("DEBUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
 
         model.addAttribute("tasks", num);
 

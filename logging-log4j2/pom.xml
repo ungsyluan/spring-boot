@@ -32,7 +32,7 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>            
         </dependency>
 
         <!-- exclude logback , add log4j2 -->
@@ -66,11 +66,6 @@
 		</dependency>
 
         <!-- asynchronous loggers -->
-        <dependency>
-            <groupId>com.lmax</groupId>
-            <artifactId>disruptor</artifactId>
-            <version>3.4.2</version>
-        </dependency>
 
         <!-- for log4j2.yml, need jackson-databind and jackson-dataformat-yaml -->
 

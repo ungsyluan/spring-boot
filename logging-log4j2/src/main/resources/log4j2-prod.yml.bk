@@ -1,4 +1,5 @@
 Configuration:
+  status: debug
 
   appenders:
     Console:
@@ -32,13 +33,13 @@ Configuration:
   Loggers:
     logger:
       - name: com.mkyong.a
-#        level: warn
+        level: debug
 #        additivity: false
         AppenderRef:
           - ref: LogToConsole
           - ref: aLog
 
-    root:
-#        level: error
-        AppenderRef:
-          - ref: RootLog
+    Root:
+      level: debug
+      AppenderRef:
+        - ref: RootLog

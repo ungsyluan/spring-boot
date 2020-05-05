@@ -1,8 +1,4 @@
 #log4j2-dev.yml
 #logging.level.org.springframework=ERROR
 #logging.level.com.mkyong=ERROR
-#logging.level.=ERROR    
-# Spring properties
-spring:
-  profiles:
-    active: dev
+#logging.level.=ERROR
