@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <File name="LogToFile" fileName="logs/app.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <JDBC name="databaseAppender" tableName="test.logs">
+	      <ConnectionFactory class="com.mkyong.ConnectionFactory" method="getDatabaseConnection" />
+	      <Column name="event_id"/>
+	      <Column name="event_date" isEventTimestamp="true" />
+	      <Column name="level" pattern="%level" />
+	      <Column name="logger" pattern="%logger" />
+	      <Column name="message" pattern="%message" />
+	      <Column name="throwable" pattern="%ex{full}" />
+	    </JDBC>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.mkyong.a" level="debug">
+            <AppenderRef ref="LogToFile"/>
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="databaseAppender"/>
+        </Logger>
+        <Logger name="org.springframework.boot" level="error" additivity="false">
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="LogToFile"/>
+            <AppenderRef ref="LogToConsole"/>
+        </Root>
+    </Loggers>
+</Configuration>

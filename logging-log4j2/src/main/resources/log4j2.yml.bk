@@ -1,6 +1,7 @@
 Configuration:
 
   appenders:
+  
     Console:
       name: LogToConsole
       PatternLayout:
@@ -35,7 +36,7 @@ Configuration:
 #        level: warn
 #        additivity: false
         AppenderRef:
-          - ref: LogToConsole
+          - ref: userAppenderDB
           - ref: aLog
 
     root:
