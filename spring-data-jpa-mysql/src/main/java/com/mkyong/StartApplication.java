@@ -1,42 +1,54 @@
 package com.mkyong;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.repository.query.Param;
 
 @SpringBootApplication
 public class StartApplication implements CommandLineRunner {
 
-    private static final Logger log = LoggerFactory.getLogger(StartApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(StartApplication.class);
 
-    @Autowired
-    private BookRepository repository;
+	@Autowired
+	private BookRepository repository;
+	@Autowired
+	private BookDetailsRepository detailsRepository;
+	String name = "A+";
 
-    public static void main(String[] args) {
-        SpringApplication.run(StartApplication.class, args);
-    }
+	@Autowired
+	private EntityManager entityManager;
 
-    @Override
-    public void run(String... args) {
+	public static void main(String[] args) {
+		SpringApplication.run(StartApplication.class, args);
+	}
 
-        log.info("StartApplication...");
+	@Override
+	public void run(String... args) {
+		repository.save(new Book("Java"));
+		repository.save(new Book("Node"));
+		repository.save(new Book("python"));
+		repository.save(new Book("A+"));
+//		Book book = repository.findById(Long.valueOf("1")).get();
+//		detailsRepository.save(new BookDetails(book, 200, "this is Java"));
+		System.out.print(getBookByName("A+"));
+		
 
-        repository.save(new Book("Java"));
-        repository.save(new Book("Node"));
-        repository.save(new Book("Python"));
+	}
 
-        System.out.println("\nfindAll()");
-        repository.findAll().forEach(x -> System.out.println(x));
-
-        System.out.println("\nfindById(1L)");
-        repository.findById(1l).ifPresent(x -> System.out.println(x));
-
-        System.out.println("\nfindByName('Node')");
-        repository.findByName("Node").forEach(x -> System.out.println(x));
-
-    }
+	String getBookByName(@Param("name") String bookName) {
+		// Scalar function
+		Query query = entityManager.createQuery("SELECT * from DBCatalog");
+		List<Book> books = query.getResultList();		
+		return books.toString();
+	}
 
 }
